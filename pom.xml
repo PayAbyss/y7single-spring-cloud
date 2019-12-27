@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.y7single</groupId>
+    <artifactId>y7single-spring-cloud-dependencies</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2019-Now</inceptionYear>
+    <description>dependencies pom</description>
+
+    <licenses>
+        <license>
+            <name>Apache 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>Hong Fu</id>
+            <name>y7</name>
+            <email>88247290@qq.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>y7single-spring-cloud-commons</module>
+        <module>y7single-spring-cloud-service</module>
+        <module>y7single-spring-cloud-test</module>
+        <module>y7single-spring-cloud-web</module>
+        <module>y7single-spring-cloud-web-starter</module>
+        <module>y7single-spring-cloud-service-starter</module>
+        <module>y7single-spring-cloud-starter</module>
+        <module>y7single-spring-boot-starter</module>
+    </modules>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+        <mybatis.plus.version>3.2.0</mybatis.plus.version>
+        <okhttp.version>4.0.1</okhttp.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <lombok.version>1.18.10</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+
+        <dependencies>
+            <!-- spring-boot-dependencies Begin -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring-boot-dependencies End -->
+
+            <!-- mybatis-plus Begin -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <!-- mybatis-plus End -->
+
+            <!--okHttp Begin -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <!--okHttp End -->
+
+            <!-- swagger2 Begin -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <!-- swagger2 End -->
+
+            <!-- lombok Begin -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- lombok End -->
+
+        </dependencies>
+
+    </dependencyManagement>
+
+
+</project>

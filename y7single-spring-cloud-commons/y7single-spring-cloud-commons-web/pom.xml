@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>y7single-spring-cloud-commons</artifactId>
+        <groupId>com.y7single</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>y7single-spring-cloud-commons-web</artifactId>
+    <packaging>jar</packaging>
+    <inceptionYear>2019-Now</inceptionYear>
+    <description>commons web pom</description>
+
+    <licenses>
+        <license>
+            <name>Apache 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>Hong Fu</id>
+            <name>y7</name>
+            <email>88247290@qq.com</email>
+        </developer>
+    </developers>
+
+    <dependencies>
+
+        <!--y7single Begin -->
+        <dependency>
+            <groupId>com.y7single</groupId>
+            <artifactId>y7single-spring-cloud-commons-public</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!--y7single End -->
+
+        <!-- spring  web Begin -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- spring  web End -->
+    </dependencies>
+
+</project>

@@ -1,0 +1,46 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/y7-commons?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: ICSHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+mybatis-plus:
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.y7single: debug
+    com.test: debug
+    com.baomidou.mybatisplus: debug
+com:
+  y7single:
+    consumer:
+      error:
+        error-path: error/error/error
+        suffix: .html
+      aop:
+        enable: true
+    provider:
+      my-batis:
+        map-custom-wrapper: true
+      aop:
+        enable: true
+      service:
+        dictionaries-service-enable: true
+
+server:
+  port: 8081
+

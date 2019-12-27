@@ -1,0 +1,11 @@
+com\y7single\service\model\po\BasePO.class
+com\y7single\service\configuration\MyBatisConfiguration$1.class
+com\y7single\service\model\TreeMap.class
+com\y7single\service\mapper\BaseSQLCurdMapper.class
+com\y7single\service\annotations\JoinTable.class
+com\y7single\service\configuration\MyBatisConfiguration$1$1.class
+com\y7single\service\configuration\MyBatisConfiguration.class
+com\y7single\service\sql\BaseSQLCurdMapperSQLProvider.class
+com\y7single\service\model\po\BaseTreePO.class
+com\y7single\service\service\mp\BaseApiServiceForMpImpl.class
+com\y7single\service\service\mp\BaseTreeApiServiceForMpImpl.class
