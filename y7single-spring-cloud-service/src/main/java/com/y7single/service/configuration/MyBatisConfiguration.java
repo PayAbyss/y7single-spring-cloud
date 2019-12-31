@@ -18,6 +18,7 @@ package com.y7single.service.configuration;
 
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.wrapper.MapWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
@@ -39,10 +40,14 @@ import java.util.Objects;
  * @description: unknown
  */
 @Configuration
+@Slf4j
 public class MyBatisConfiguration {
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
+
+        log.debug("MyBatisConfiguration:Configuration:[{}]", "configurationCustomizer");
+
         return configuration -> configuration.setObjectWrapperFactory(new ObjectWrapperFactory() {
 
             @Override

@@ -18,6 +18,8 @@ package com.y7single.commons.exceptions;
 
 import com.y7single.commons.model.exception.ResultCode;
 import com.y7single.commons.utils.BusinessExceptionFactory;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author: y7
@@ -29,6 +31,8 @@ import com.y7single.commons.utils.BusinessExceptionFactory;
  * @github: https://github.com/PayAbyss
  * @description: unknown
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class BusinessException extends RuntimeException {
 
 

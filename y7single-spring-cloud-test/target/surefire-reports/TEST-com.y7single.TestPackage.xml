@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.y7single.TestPackage" time="0.199" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.y7single.TestPackage" time="0.208" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="F:\JAVA\jdk\jre\bin"/>
@@ -30,7 +30,7 @@
     <property name="maven.ext.class.path" value="F:\IDEA\IntelliJ IDEA 2019.2.2\plugins\maven\lib\maven-event-listener.jar"/>
     <property name="classworlds.conf" value="F:\Maven\apache-maven-3.5.4\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="F:\JAVA\jdk\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;F:\perl\site\bin;F:\perl\bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;F:\git\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\ffmpeg\ffmpeg-20181204-f176d65-win64-static\bin;F:\python;F:\Node\nodejs\;F:\flutter\bin;F:\JAVA\jdk\bin;F:\JAVA\jdk\jre\bin;F:\MySQL\bin;F:\VisualStudioCode\Microsoft VS Code\bin;F:\Node\node_global\;C:\Users\d\AppData\Local\Microsoft\WindowsApps;F:\Maven\apache-maven-3.5.4\bin;C:\Users\d\AppData\Roaming\npm;;."/>
+    <property name="java.library.path" value="F:\JAVA\jdk\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;F:\perl\site\bin;F:\perl\bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;F:\git\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\ffmpeg\ffmpeg-20181204-f176d65-win64-static\bin;F:\python;F:\Node\nodejs\;F:\flutter\bin;F:\JAVA\jdk\bin;F:\JAVA\jdk\jre\bin;F:\MySQL\bin;F:\VisualStudioCode\Microsoft VS Code\bin;F:\Node\node_global\;C:\Users\d\AppData\Local\Microsoft\WindowsApps;F:\Maven\apache-maven-3.5.4\bin;C:\Users\d\AppData\Roaming\npm;C:\Users\d\AppData\Local\BypassRuntm;."/>
     <property name="maven.conf" value="F:\Maven\apache-maven-3.5.4/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
@@ -65,5 +65,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.y7single.TestPackage" name="testAutoConfiguration" time="0.199"/>
+  <testcase classname="com.y7single.TestPackage" name="testAutoConfiguration" time="0.208"/>
 </testsuite>

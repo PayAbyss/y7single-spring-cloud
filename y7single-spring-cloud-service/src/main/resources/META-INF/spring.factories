@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.y7single.service.configuration.MyBatisConfiguration,\
+com.y7single.service.configuration.MyBatisPlusConfiguration

@@ -38,20 +38,22 @@ import com.y7single.commons.model.po.PO;
 import com.y7single.commons.model.qo.JoinQO;
 import com.y7single.commons.model.qo.PageQO;
 import com.y7single.commons.utils.BeanUtils;
+import com.y7single.commons.utils.ParameterizedTypeUtils;
 import com.y7single.service.mapper.BaseSQLCurdMapper;
 import org.apache.ibatis.reflection.property.PropertyNamer;
-
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -64,24 +66,24 @@ import java.util.stream.Collectors;
  * @github: https://github.com/PayAbyss
  * @description: mybatis plus 实现 M Mapper E dao PK 主键类型
  */
+@SuppressWarnings("all")
 public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>, E extends PO<PK>, D extends BaseDTO<PK>, PK extends Serializable> extends ServiceImpl<M, E> implements BaseApiServiceForMp<E, D, PK> {
 
     protected Class<E> poType;
 
     protected Class<D> dtoType;
 
+    protected String idColumn;
 
-    private String idColumn;
-
-    protected static Map<String, ColumnCache> columnMap;
+    protected Map<String, ColumnCache> columnMap;
 
     @SuppressWarnings("unchecked")
     public BaseApiServiceForMpImpl() {
 
-        ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
+        final Class<? extends BaseApiServiceForMpImpl> thisClass = this.getClass();
 
-        poType = (Class<E>) parameterizedType.getActualTypeArguments()[1];
-        dtoType = (Class<D>) parameterizedType.getActualTypeArguments()[2];
+        poType = (Class<E>) ParameterizedTypeUtils.getParameterizedType(thisClass, 1);
+        dtoType = (Class<D>) ParameterizedTypeUtils.getParameterizedType(thisClass, 2);
     }
 
     /**
@@ -306,11 +308,19 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
 
         final E e = record.convertToR(poType);
 
-        PropertyDescriptor[] propertyDescriptors = org.springframework.beans.BeanUtils.getPropertyDescriptors(poType);
+        final PropertyDescriptor[] descriptors = org.springframework.beans.BeanUtils.getPropertyDescriptors(poType);
+
+        final TreeSet<PropertyDescriptor> propertyDescriptors = Arrays.stream(descriptors)
+                .filter(this::propertyDescriptorFilter)
+                .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(PropertyDescriptor::getName))));
 
         try {
 
             for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+
+                final String descriptorName = propertyDescriptor.getName();
+
+                if (descriptorName.equals("class")) continue;
 
                 Method readMethod = propertyDescriptor.getReadMethod();
 
@@ -318,9 +328,9 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
 
                 if (Objects.isNull(invoke)) continue;
 
-                final String fieldName = PropertyNamer.methodToProperty(propertyDescriptor.getName());
+                //    final String fieldName = PropertyNamer.methodToProperty(descriptorName);
 
-                final String column = columnMap.get(LambdaUtils.formatKey(fieldName)).getColumn();
+                final String column = columnMap.get(LambdaUtils.formatKey(descriptorName)).getColumn();
 
                 update.set(column, invoke);
             }
@@ -337,14 +347,19 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
 
     }
 
+    protected boolean propertyDescriptorFilter(PropertyDescriptor propertyDescriptor) {
+        return !propertyDescriptor.getName().equals("class");
+    }
+
     protected QueryWrapper<E> getQueryWrapper() {
+        initColumnMap();
 
         return Wrappers.query();
     }
 
 
     protected UpdateWrapper<E> getUpdateWrapper() {
-
+        initColumnMap();
         return Wrappers.update();
     }
 
@@ -352,10 +367,14 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
         return Optional.ofNullable(idColumn).orElseGet(() -> idColumn = getColumn(E::getId));
     }
 
+    protected void initColumnMap() {
+
+        columnMap = Optional.ofNullable(columnMap).orElseGet(() -> LambdaUtils.getColumnMap(poType));
+    }
 
     protected String getColumn(SFunction<E, ?> func) {
 
-        if (Objects.isNull(columnMap) || columnMap.isEmpty()) columnMap = LambdaUtils.getColumnMap(poType);
+        if (Objects.isNull(columnMap) || columnMap.isEmpty()) initColumnMap();
 
         final SerializedLambda serializedLambda = LambdaUtils.resolve(func);
 
