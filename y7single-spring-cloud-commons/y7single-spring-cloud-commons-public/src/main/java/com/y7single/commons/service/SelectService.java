@@ -24,7 +24,9 @@ import com.y7single.commons.model.qo.PageQO;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @author: y7
@@ -70,6 +72,32 @@ public interface SelectService<T, PK extends Serializable> {
      */
     PageBO<T> findByPage(PageQO pageQO);
 
+    /**
+     * 条件查询
+     *
+     * @param column 列名
+     * @param value  值
+     * @return 查询结果
+     */
+    Collection<T> findByWhere(String column, Object value);
+
+    /**
+     * 条件查询
+     *
+     * @param condition key 为列名 value 为条件值
+     * @return 查询结果
+     */
+    Collection<T> findByWhere(Map<String, Object> condition);
+
+
+    /**
+     * 条件查询
+     *
+     * @param columns 列名
+     * @param values  值
+     * @return 查询结果
+     */
+    Collection<T> findByWhere(List<String> columns, List<Object> values);
 
     /**
      * 根据id关联查询

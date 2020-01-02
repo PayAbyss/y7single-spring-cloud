@@ -37,10 +37,12 @@ import com.y7single.commons.model.dto.BaseDTO;
 import com.y7single.commons.model.po.PO;
 import com.y7single.commons.model.qo.JoinQO;
 import com.y7single.commons.model.qo.PageQO;
+import com.y7single.commons.utils.Assert;
 import com.y7single.commons.utils.BeanUtils;
 import com.y7single.commons.utils.ParameterizedTypeUtils;
 import com.y7single.service.mapper.BaseSQLCurdMapper;
 import org.apache.ibatis.reflection.property.PropertyNamer;
+
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -189,6 +191,70 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
 
         return new PageBO<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal(), iPage.getPages(), ds);
     }
+
+    /**
+     * @param column 列名
+     * @param value  值
+     * @return 查询结果
+     */
+    @Override
+    public Collection<D> findByWhere(String column, Object value) {
+
+        Assert.notNull(column, DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        Assert.notNull(value, DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        final QueryWrapper<E> queryWrapper = getQueryWrapper();
+
+        queryWrapper.eq(column, value);
+
+        final List<E> es = this.baseMapper.selectList(queryWrapper);
+
+        return convertToD(es);
+    }
+
+    /**
+     * @param columns 列名
+     * @param values  值
+     * @return 查询结果
+     */
+    @Override
+    public Collection<D> findByWhere(List<String> columns, List<Object> values) {
+
+        Assert.notNull(columns, DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        Assert.notNull(values, DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        if (columns.size() != values.size()) throw new SQLException(DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        final QueryWrapper<E> queryWrapper = getQueryWrapper();
+
+        for (int i = 0; i < columns.size(); i++) {
+            queryWrapper.eq(columns.get(i), values.get(i));
+        }
+
+        final List<E> es = this.baseMapper.selectList(queryWrapper);
+
+        return convertToD(es);
+    }
+
+
+    @Override
+    public Collection<D> findByWhere(Map<String, Object> condition) {
+
+        Assert.notNull(condition, DefaultResultCode.PARAM_NOT_COMPLETE);
+
+        final QueryWrapper<E> queryWrapper = getQueryWrapper();
+
+        condition.entrySet().forEach(entry -> queryWrapper.eq(entry.getKey(), entry.getValue()));
+
+        final List<E> es = this.baseMapper.selectList(queryWrapper);
+
+        return convertToD(es);
+    }
+
+
+
 
     /**
      * @param pk 主键
