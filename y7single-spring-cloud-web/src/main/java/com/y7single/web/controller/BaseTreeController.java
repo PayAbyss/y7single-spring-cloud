@@ -50,7 +50,7 @@ public abstract class BaseTreeController<S extends BaseTreeApiService, V extends
         extends BaseController<S, V, D, PK> implements BaseTreeApiController<S, V, D, PK> {
 
     @Autowired(required = false)
-    private S baseApiService;
+    protected S baseApiService;
 
     public BaseTreeController() {
         super.setBaseApiService(baseApiService);

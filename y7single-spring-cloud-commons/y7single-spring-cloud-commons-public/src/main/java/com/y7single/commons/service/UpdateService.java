@@ -44,5 +44,5 @@ public interface UpdateService<T> {
      * @param record 数据
      * @return 修改成功数据
      */
-    boolean updatePart(T record);
+    boolean updatePart(T record, String... ignoredProperty);
 }

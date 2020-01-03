@@ -23,6 +23,7 @@ F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\model\qo\JoinQO.java
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\service\DeleteService.java
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\exceptions\SQLException.java
+F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\validated\annotations\EnumValue.java
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\service\InsertService.java
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\model\po\PO.java
 F:\IDEAApplication\y7single-spring-cloud\y7single-spring-cloud-commons\y7single-spring-cloud-commons-public\src\main\java\com\y7single\commons\model\bo\PageBO.java

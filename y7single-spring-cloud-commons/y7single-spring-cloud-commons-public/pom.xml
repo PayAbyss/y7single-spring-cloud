@@ -55,6 +55,14 @@
         <!-- okHttp End -->
 
 
+
+        <!-- hibernate validator Begin -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <!-- hibernate validator End -->
+
         <!--lombok Begin -->
         <dependency>
             <groupId>org.projectlombok</groupId>

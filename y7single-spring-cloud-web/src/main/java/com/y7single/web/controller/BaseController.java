@@ -66,7 +66,7 @@ public abstract class BaseController<S extends BaseApiService, V extends BaseVO<
 
 
     @Autowired(required = false)
-    private S baseApiService;
+    protected S baseApiService;
 
     protected Class<V> vType;
 
@@ -133,7 +133,7 @@ public abstract class BaseController<S extends BaseApiService, V extends BaseVO<
     @PutMapping(value = "updatePart")
     @Override
     public boolean updatePart(@RequestBody D record) {
-        return this.baseApiService.updatePart(record);
+        return this.baseApiService.updatePart(record, null);
     }
 
 

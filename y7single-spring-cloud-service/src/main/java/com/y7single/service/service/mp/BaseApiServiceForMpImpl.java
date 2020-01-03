@@ -28,7 +28,6 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.y7single.commons.dao.service.mp.BaseApiServiceForMp;
 import com.y7single.commons.enums.DefaultResultCode;
 import com.y7single.commons.exceptions.SQLException;
@@ -254,8 +253,6 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
     }
 
 
-
-
     /**
      * @param pk 主键
      * @return 关联查询数据map
@@ -358,7 +355,13 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
     @Override
     public boolean update(D record) {
 
-        return updateById(record.convertToR(poType));
+        final E e = record.convertToR(poType);
+
+        // 防止PK类型未检测到
+        if (Objects.isNull(e.getId()))
+            e.setId(record.getId());
+
+        return updateById(e);
     }
 
     /**
@@ -368,16 +371,19 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
      * @return 是否修改成功
      */
     @Override
-    public boolean updatePart(D record) {
+    public boolean updatePart(D record, String... ignoredProperty) {
 
         UpdateWrapper<E> update = getUpdateWrapper();
 
         final E e = record.convertToR(poType);
 
+        List<String> igProperty = Arrays.asList(ignoredProperty);
+
         final PropertyDescriptor[] descriptors = org.springframework.beans.BeanUtils.getPropertyDescriptors(poType);
 
         final TreeSet<PropertyDescriptor> propertyDescriptors = Arrays.stream(descriptors)
                 .filter(this::propertyDescriptorFilter)
+                .filter(propertyDescriptor -> !igProperty.contains(propertyDescriptor.getName()))
                 .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(PropertyDescriptor::getName))));
 
         try {
@@ -401,9 +407,9 @@ public abstract class BaseApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>
                 update.set(column, invoke);
             }
 
-            final int result = this.baseMapper.update(e, update);
+            update.eq(getIdColumn(), record.getId());
 
-            return SqlHelper.retBool(result);
+            return this.update(update);
 
         } catch (IllegalAccessException | InvocationTargetException ex) {
 

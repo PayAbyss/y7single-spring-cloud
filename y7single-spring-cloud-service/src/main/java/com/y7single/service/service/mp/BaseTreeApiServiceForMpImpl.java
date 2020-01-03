@@ -22,16 +22,13 @@ import com.y7single.commons.enums.DefaultResultCode;
 import com.y7single.commons.model.bo.TreeNodeBO;
 import com.y7single.commons.model.TreeModel;
 import com.y7single.commons.model.dto.BaseTreeDTO;
-import com.y7single.commons.model.po.TreePO;
 import com.y7single.commons.model.qo.JoinQO;
-import com.y7single.commons.model.vo.BaseTreeVO;
 import com.y7single.commons.utils.Assert;
 import com.y7single.commons.utils.BeanUtils;
 import com.y7single.service.mapper.BaseSQLCurdMapper;
 import com.y7single.service.model.TreeMap;
 import com.y7single.service.model.po.BaseTreePO;
 import org.springframework.util.CollectionUtils;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +51,7 @@ import java.util.stream.Collectors;
  */
 public class BaseTreeApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>, E extends BaseTreePO<PK>, D extends BaseTreeDTO<PK>, PK extends Serializable> extends BaseApiServiceForMpImpl<M, E, D, PK> implements BaseTreeApiServiceForMp<E, D, PK> {
 
-    private String parentColumn;
+    protected String parentColumn;
 
     /**
      * @param parentId 父节点ID
@@ -378,7 +375,7 @@ public class BaseTreeApiServiceForMpImpl<M extends BaseSQLCurdMapper<E, PK>, E e
     }
 
 
-    private String getParentColumn() {
+    protected String getParentColumn() {
         return Optional.ofNullable(parentColumn).orElseGet(() -> parentColumn = getColumn(E::getParentId));
     }
 
